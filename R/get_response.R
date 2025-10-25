@@ -49,7 +49,7 @@ get_response = function(user_input = "what is a p-value in statistics?",
                    )
                   ), auto_unbox = T)
 
-  result = getURL(url, httpheader = headers, postfields = data)
+  result = getURL(url, httpheader = headers, postfields = data, .encoding = "UTF-8")
   result = fromJSON(result)
 
   if(print_response){
