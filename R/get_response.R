@@ -39,10 +39,15 @@ get_response = function(user_input = "what is a p-value in statistics?",
     "Content-Type" = "application/json"
   )
 
-  data = paste0('{"model": "', model,'", "messages": [
-          {"role": "system", "content": "', system_specification, '"},
-          {"role": "user", "content": "', user_input, '"}
-          ]}')
+  data = toJSON(list(
+                  model = model,
+                  messages = list(
+                                list(role = "system", 
+                                     content=  system_specification),
+                                list(role = "user", 
+                                     content = user_input) 
+                   )
+                  ), auto_unbox = T)
 
   result = getURL(url, httpheader = headers, postfields = data)
   result = fromJSON(result)
